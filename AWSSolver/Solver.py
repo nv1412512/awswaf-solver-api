@@ -69,7 +69,31 @@ class AwsSolver:
             }
     
     def _build_metrics(self):
-        return [{"name":"2","value":0.09999999403953552,"unit":"2"},{"name":"100","value":0,"unit":"2"},{"name":"101","value":0,"unit":"2"},{"name":"102","value":1,"unit":"2"},{"name":"103","value":2,"unit":"2"},{"name":"104","value":0,"unit":"2"},{"name":"105","value":0,"unit":"2"},{"name":"106","value":0,"unit":"2"},{"name":"107","value":0,"unit":"2"},{"name":"108","value":0,"unit":"2"},{"name":"undefined","value":1,"unit":"2"},{"name":"110","value":0,"unit":"2"},{"name":"111","value":3,"unit":"2"},{"name":"112","value":0,"unit":"2"},{"name":"undefined","value":0,"unit":"2"},{"name":"3","value":0.6000000089406967,"unit":"2"},{"name":"7","value":1,"unit":"4"},{"name":"1","value":8.099999994039536,"unit":"2"},{"name":"4","value":418.29999999701977,"unit":"2"},{"name":"5","value":0.10000000894069672,"unit":"2"},{"name":"6","value":426.5,"unit":"2"},{"name":"8","value":0,"unit":"4"}]
+        return [
+            {"name": "2",         "value": random.uniform(0, 1),    "unit": "2"},
+            {"name": "100",       "value": 0,                        "unit": "2"},
+            {"name": "101",       "value": 0,                        "unit": "2"},
+            {"name": "102",       "value": 0,                        "unit": "2"},
+            {"name": "103",       "value": 8,                        "unit": "2"},
+            {"name": "104",       "value": 0,                        "unit": "2"},
+            {"name": "105",       "value": 0,                        "unit": "2"},
+            {"name": "106",       "value": 0,                        "unit": "2"},
+            {"name": "107",       "value": 0,                        "unit": "2"},
+            {"name": "108",       "value": 1,                        "unit": "2"},
+            {"name": "undefined", "value": 0,                        "unit": "2"},
+            {"name": "110",       "value": 0,                        "unit": "2"},
+            {"name": "111",       "value": 2,                        "unit": "2"},
+            {"name": "112",       "value": 0,                        "unit": "2"},
+            {"name": "undefined", "value": 0,                        "unit": "2"},
+            {"name": "3",         "value": 4,                        "unit": "2"},
+            {"name": "7",         "value": 0,                        "unit": "4"},
+            {"name": "1",         "value": random.uniform(5, 20),    "unit": "2"},
+            {"name": "4",         "value": 36.5,                     "unit": "2"},
+            {"name": "5",         "value": random.uniform(0, 1),     "unit": "2"},
+            {"name": "6",         "value": random.uniform(100, 500),   "unit": "2"},
+            {"name": "0",         "value": random.uniform(135, 500), "unit": "2"},
+            {"name": "8",         "value": 1,                        "unit": "4"},
+        ]
 
     
     async def post_payload(self, payload, host_url):

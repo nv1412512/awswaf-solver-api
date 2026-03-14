@@ -37,7 +37,7 @@ async def main():
         "aws-waf-token": token
     }
     response = await client.request(method=getattr(Method, "GET"), url=f"{URL}", timeout=timedelta(seconds = 10), headers=HEADERS, cookies = cookies)
-
+    text = await response.text()
     print(f"[+] Status: {response.status.as_int()}")
     print(f"[+] Response: {text[:500]}")
 
