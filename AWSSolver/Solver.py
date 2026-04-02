@@ -3,6 +3,7 @@ from wreq import Client, Emulation, Method, redirect, Multipart, Part
 from datetime import timedelta
 from .PayloadHandler import build_everything
 import random
+import re
 from .SolutionTokenHandler import CHALLENGES
 
 BANDWIDTH_CHALLENGE = "ha9faaffd31b4d5ede2a2e19d2d7fd525f66fee61911511960dcbb52d3c48ce25"
@@ -33,9 +34,14 @@ class AwsSolver:
         else:
             self.domain = domain
 
-    def extract(self,html: str):
-        goku_props = json.loads(html.split("window.gokuProps = ")[1].split(";")[0])
-        host = html.split("src=\"https://")[1].split("/challenge.js")[0]
+    def extract(self, html: str):
+        goku_props = None
+        if "window.gokuProps = " in html:
+            goku_props = json.loads(html.split("window.gokuProps = ")[1].split(";")[0])
+        match = re.search(r'src="https://([^"]+/challenge\.js)"', html)
+        if not match:
+            raise ValueError("challenge.js script tag not found in HTML")
+        host = match.group(1).replace("/challenge.js", "")
         return goku_props, host
     
 
@@ -59,8 +65,9 @@ class AwsSolver:
                 "client": "Browser",
                 "domain": self.domain,
                 "metrics": self._build_metrics(),
-                "goku_props": goku_props
             }
+            if goku_props is not None:
+                solution_metadata["goku_props"] = goku_props
             return {
                 "_is_bandwidth": True,
                 "solution_data": solution_b64,
