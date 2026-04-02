@@ -1,4 +1,6 @@
-from fastapi import FastAPI, HTTPException
+import os
+
+from fastapi import FastAPI, HTTPException, Header
 from pydantic import BaseModel
 from wreq import Client, Emulation, Method
 from AWSSolver.Solver import AwsSolver
@@ -6,6 +8,8 @@ from datetime import timedelta
 from urllib.parse import urlparse
 
 app = FastAPI()
+
+API_KEY = os.environ.get("API_KEY", "")
 
 
 class SolveRequest(BaseModel):
@@ -26,7 +30,9 @@ def extract_domain(value: str) -> str:
 
 
 @app.post("/solve")
-async def solve(request: SolveRequest):
+async def solve(request: SolveRequest, x_api_key: str = Header(alias="x-api-key")):
+    if not API_KEY or x_api_key != API_KEY:
+        raise HTTPException(status_code=401, detail="Invalid API key")
     domain = extract_domain(request.domain if request.domain else request.url)
     try:
         client = Client(emulation=Emulation.Chrome143, cookie_store=True)
