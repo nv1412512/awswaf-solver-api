@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from rnet import Client, Emulation, Method
+from wreq import Client, Emulation, Method
 from AWSSolver.Solver import AwsSolver
 from datetime import timedelta
 from urllib.parse import urlparse

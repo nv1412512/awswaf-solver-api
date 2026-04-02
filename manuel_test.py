@@ -1,4 +1,4 @@
-from rnet import Client, Emulation, Method, redirect
+from wreq import Client, Emulation, Method, redirect
 import httpx
 import asyncio
 from datetime import timedelta

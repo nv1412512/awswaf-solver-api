@@ -1,9 +1,8 @@
 import json
-from rnet import Client, Emulation, Method, redirect
+from wreq import Client, Emulation, Method, redirect, Multipart, Part
 from datetime import timedelta
 from .PayloadHandler import build_everything
 import random
-from rnet import Client, Emulation, Method, redirect, Multipart, Part
 from .SolutionTokenHandler import CHALLENGES
 
 BANDWIDTH_CHALLENGE = "ha9faaffd31b4d5ede2a2e19d2d7fd525f66fee61911511960dcbb52d3c48ce25"
